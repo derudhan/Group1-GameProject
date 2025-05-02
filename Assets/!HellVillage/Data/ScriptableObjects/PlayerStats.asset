@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea64937fcd7acdd4ab069f717d7a485a, type: 3}
+  m_Name: PlayerStats
+  m_EditorClassIdentifier: 
+  MoveThreshold: 0.25
+  MaxWalkSpeed: 12.5
+  Acceleration: 5
+  Deceleration: 20
+  MaxRunSpeed: 20
+  CanDash: 0
+  DashTime: 0.11
+  DashSpeed: 40
+  NumberOfDashes: 1
