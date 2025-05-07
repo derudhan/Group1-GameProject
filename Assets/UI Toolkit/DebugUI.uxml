@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/DebugUIStyle.uss?fileID=7433441132597879392&amp;guid=d50e10efa7a92a84cba42fb921704f8c&amp;type=3" />
-    <ui:VisualElement name="Container" style="flex-grow: 1; flex-basis: auto; flex-wrap: nowrap; flex-direction: column;">
-        <ui:Label text="TitleGame" name="TitleGame" class="debugText" />
-        <ui:Label text="Temp&#10;" name="Temp" class="debugText" />
-    </ui:VisualElement>
-</ui:UXML>

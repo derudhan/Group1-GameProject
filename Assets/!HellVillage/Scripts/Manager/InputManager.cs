@@ -17,7 +17,7 @@ namespace HellVillage
         {
             PlayerInput = GetComponent<PlayerInput>();
 
-            _moveAction = PlayerInput.actions["Movement"];
+            _moveAction = PlayerInput.actions["Move"];
             _runAction = PlayerInput.actions["Sprint"];
         }
 
