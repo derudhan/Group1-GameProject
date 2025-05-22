@@ -4,39 +4,51 @@ using UnityEngine;
 /// Skrip abstrak untuk state machine.
 /// Class ini digunakan sebagai dasar untuk state-state lain.
 /// </summary>
-namespace HellVillage
-{
-    public abstract class State : MonoBehaviour
-    {
+namespace HellVillage {
+    public abstract class State : MonoBehaviour {
         public bool IsComplete { get; protected set; }
 
         protected float startTime;
         public float ElapsedTime => Time.time - startTime;
 
-        [SerializeField] protected string animationName;
+        protected StateCore core;
 
-        protected Rigidbody2D rb;
-        protected PlayerStats playerStats;
-        protected Animator animator;
-        protected PlayerControl playerControl;
+        protected Rigidbody2D rb => core.rigidBody;
+        protected MovementStats playerStats => core.movementStats;
+        protected Animator animator => core.animator;
+
+        public StateMachine machine;
+        public StateMachine parent;
+        public State state => machine.state;
+
+        protected void Set(State newState, bool force = false) {
+            machine.Set(newState, force);
+        }
+
+        public void SetCore(StateCore _core) {
+            machine = new StateMachine();
+            core = _core;
+        }
 
         public virtual void OnEnter() { }
         public virtual void DoUpdate() { }
         public virtual void DoFixedUpdate() { }
         public virtual void OnExit() { }
 
-        public void Initialize()
-        {
-            startTime = Time.time;
-            IsComplete = false;
+        public void DoUpdateBranch() {
+            DoUpdate();
+            state?.DoUpdateBranch();
         }
 
-        public void Setup(Rigidbody2D rb, PlayerStats playerStats, Animator animator, PlayerControl playerControl)
-        {
-            this.rb = rb;
-            this.playerStats = playerStats;
-            this.animator = animator;
-            this.playerControl = playerControl;
+        public void DoFixedUpdateBranch() {
+            DoFixedUpdate();
+            state?.DoFixedUpdateBranch();
+        }
+
+        public void Initialize(StateMachine _parent) {
+            parent = _parent;
+            startTime = Time.time;
+            IsComplete = false;
         }
     }
 }

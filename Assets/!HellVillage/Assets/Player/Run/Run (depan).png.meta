@@ -1,0 +1,310 @@
+fileFormatVersion: 2
+guid: b3c68cdd2bdca764284672ef7d96578f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1818560290218399766
+    second: Run (depan)_0
+  - first:
+      213: 4032948424866675661
+    second: Run (depan)_1
+  - first:
+      213: -8910306075850223025
+    second: Run (depan)_2
+  - first:
+      213: -1888065233570168605
+    second: Run (depan)_3
+  - first:
+      213: -7717201286319196433
+    second: Run (depan)_4
+  - first:
+      213: 4661438916186890031
+    second: Run (depan)_5
+  - first:
+      213: 7545623187877822637
+    second: Run (depan)_6
+  - first:
+      213: 5847454509717358468
+    second: Run (depan)_7
+  - first:
+      213: 2106269118218013649
+    second: Run (depan)_8
+  - first:
+      213: 3752699135257918044
+    second: Run (depan)_9
+  - first:
+      213: 655115209928827790
+    second: Run (depan)_10
+  - first:
+      213: -2967210614386217383
+    second: Run (depan)_11
+  - first:
+      213: 597567669742200464
+    second: Run (depan)_12
+  - first:
+      213: 9161336839277429575
+    second: Run (depan)_13
+  - first:
+      213: 4814446712822711861
+    second: Run (depan)_14
+  - first:
+      213: 7879500721948028982
+    second: Run (depan)_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1536
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Run (depan)_0
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 91
+        width: 1910
+        height: 3990
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcb36a59939e7f730800000000000000
+      internalID: 4032948424866675661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run (depan)_1
+      rect:
+        serializedVersion: 2
+        x: 4577
+        y: 91
+        width: 1910
+        height: 4006
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e009486cae3cc5e0800000000000000
+      internalID: -1888065233570168605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run (depan)_2
+      rect:
+        serializedVersion: 2
+        x: 7939
+        y: 154
+        width: 2043
+        height: 3910
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f50853ff1c0b040800000000000000
+      internalID: 4661438916186890031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run (depan)_3
+      rect:
+        serializedVersion: 2
+        x: 11421
+        y: 91
+        width: 1844
+        height: 3990
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48785fb35e4562150800000000000000
+      internalID: 5847454509717358468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run (depan)_4
+      rect:
+        serializedVersion: 2
+        x: 14811
+        y: 99
+        width: 1877
+        height: 3986
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ab6f91bf3441430800000000000000
+      internalID: 3752699135257918044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run (depan)_5
+      rect:
+        serializedVersion: 2
+        x: 18185
+        y: 145
+        width: 1872
+        height: 3940
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95eadbbcaa952d6d0800000000000000
+      internalID: -2967210614386217383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 02ae7d44108d1d84b84cd65fb1ca5e3a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Run (depan)_0: 4032948424866675661
+      Run (depan)_1: -1888065233570168605
+      Run (depan)_10: 655115209928827790
+      Run (depan)_12: 597567669742200464
+      Run (depan)_13: 9161336839277429575
+      Run (depan)_14: 4814446712822711861
+      Run (depan)_15: 7879500721948028982
+      Run (depan)_2: 4661438916186890031
+      Run (depan)_3: 5847454509717358468
+      Run (depan)_4: 3752699135257918044
+      Run (depan)_5: -2967210614386217383
+      Run (depan)_6: 7545623187877822637
+      Run (depan)_8: 2106269118218013649
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

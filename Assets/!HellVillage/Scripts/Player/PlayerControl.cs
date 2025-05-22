@@ -1,60 +1,42 @@
+using DG.Tweening;
 using UnityEngine;
 
 /// <summary>
 /// Skrip untuk mengontrol gerakan pemain (top-down 2D) serta aksi lainnya.
 /// </summary>
 
-namespace HellVillage
-{
-    public class PlayerControl : MonoBehaviour
-    {
-        State _state;
-        public PlayerIdle idleState;
-        public PlayerWalk walkState;
-        public PlayerRun runState;
+namespace HellVillage {
+    public class PlayerControl : StateCore {
+        public Transform CameraTargetTransform;
+        public float CameraBiasTime = 0.2f;
+
+        public IdleState idleState;
+        public WalkState walkState;
+        public RunState runState;
 
         public Vector2 _movementInput { get; private set; }
         public bool _runIsHeld { get; private set; }
-        public int _idleAnimatorHash { get; private set; }
-        public int _walkAnimatorHash { get; private set; }
 
-        [SerializeField] Rigidbody2D _rb;
-        [SerializeField] PlayerStats _playerStats;
-        [SerializeField] Animator _animator;
-
-        const string _animatorHorizontal = "Horizontal";
-        const string _animatorVertical = "Vertical";
-        const string _animatorLastVertical = "LastVertical";
-        const string _animatorLastHorizontal = "LastHorizontal";
-
-        private void Start()
-        {
-            _idleAnimatorHash = Animator.StringToHash("Idle");
-            _walkAnimatorHash = Animator.StringToHash("Walk");
-
-            idleState.Setup(_rb, _playerStats, _animator, this);
-            walkState.Setup(_rb, _playerStats, _animator, this);
-            runState.Setup(_rb, _playerStats, _animator, this);
-            _state = idleState;
+        private void Start() {
+            SetupInstances();
+            Set(idleState);
         }
 
-        private void Update()
-        {
+        private void Update() {
             CheckInput();
-            HandleAnimator();
 
             SelectState();
-            _state.DoUpdate();
+            state.DoUpdateBranch();
         }
 
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             HandleMovement();
             ApplyFriction();
+            HandleAnimator();
+            HandleCameraBias();
         }
 
-        private void CheckInput()
-        {
+        private void CheckInput() {
             _movementInput = InputManager.Movement.normalized;
             _runIsHeld = InputManager.RunIsHeld;
         }
@@ -62,84 +44,53 @@ namespace HellVillage
         /// <summary>
         /// Function untuk mengatur state pemain berdasarkan input.
         /// </summary>
-        private void SelectState()
-        {
-            State oldState = _state;
-
-            if (_movementInput.magnitude != 0)
-            {
-                if (_runIsHeld)
-                {
-                    _state = runState;
+        private void SelectState() {
+            if (_movementInput.magnitude > 0.1f) {
+                if (_runIsHeld) {
+                    Set(runState);
+                } else {
+                    Set(walkState);
                 }
-                else
-                {
-                    _state = walkState;
-                }
+            } else {
+                Set(idleState);
             }
-            else
-            {
-                _state = idleState;
-            }
-
-            if (_state != oldState || _state.IsComplete)
-            {
-                oldState.OnExit();
-                _state.Initialize();
-                _state.OnEnter();
-            }
-
         }
 
-        private void HandleMovement()
-        {
-            if (Mathf.Abs(_movementInput.magnitude) > 0)
-            {
+        private void HandleMovement() {
+            if (Mathf.Abs(_movementInput.magnitude) > 0) {
                 // Tentukan kecepatan berdasarkan apakah pemain berlari atau tidak
-                float maxSpeed = _runIsHeld ? _playerStats.MaxRunSpeed : _playerStats.MaxWalkSpeed;
+                float maxSpeed = _runIsHeld ? movementStats.MaxRunSpeed : movementStats.MaxWalkSpeed;
 
-                // Akselerasi velocity dengan variabel dari _playerStats lalu clamp ke max speed
-                Vector2 incremental = _movementInput * _playerStats.Acceleration;
-                Vector2 newSpeed = Vector2.ClampMagnitude(_rb.linearVelocity + incremental, maxSpeed);
-                _rb.linearVelocity = newSpeed;
+                // Akselerasi velocity dengan variabel dari movementStats lalu clamp ke max speed
+                Vector2 incremental = _movementInput * movementStats.Acceleration;
+                Vector2 newSpeed = Vector2.ClampMagnitude(rigidBody.linearVelocity + incremental, maxSpeed);
+                rigidBody.linearVelocity = newSpeed;
             }
         }
 
-        private void ApplyFriction()
-        {
+        private void ApplyFriction() {
             // Jika tidak ada input, maka terapkan friction
-            if (_movementInput == Vector2.zero)
-            {
-                _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, Vector2.zero, _playerStats.Deceleration * Time.fixedDeltaTime);
+            if (_movementInput == Vector2.zero) {
+                rigidBody.linearVelocity = Vector2.Lerp(rigidBody.linearVelocity, Vector2.zero, movementStats.Deceleration * Time.fixedDeltaTime);
             }
         }
 
-        private void HandleAnimator()
-        {
-            _animator.SetFloat(_animatorVertical, _movementInput.y);
-            _animator.SetFloat(_animatorHorizontal, _movementInput.x);
+        private void HandleAnimator() {
+            animator.SetFloat(Const.animatorHorizontal, _movementInput.x);
+            animator.SetFloat(Const.animatorVertical, _movementInput.y);
 
-            if (_movementInput != Vector2.zero)
-            {
-                _animator.SetFloat(_animatorLastVertical, _movementInput.y);
-                _animator.SetFloat(_animatorLastHorizontal, _movementInput.x);
+            if (_movementInput != Vector2.zero) {
+                animator.SetFloat(Const.animatorLastHorizontal, _movementInput.x);
+                animator.SetFloat(Const.animatorLastVertical, _movementInput.y);
+                animator.speed = Helpers.Map(movementStats.MaxWalkSpeed, 0, 1, 0, 1, true);
             }
         }
 
-        #region Debugging Area
-#if UNITY_EDITOR
-        private void OnDrawGizmos()
-        {
-            if (Application.isPlaying)
-            {
-                UnityEditor.Handles.Label(
-                    new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z),
-                    $"Speed: {_rb.linearVelocity.magnitude:F2} m/s\n" +
-                    $"Input: {_movementInput}\n" +
-                    $"Current State: {_state.GetType().Name}");
+        private void HandleCameraBias() {
+            if (CameraTargetTransform != null && _movementInput != Vector2.zero) {
+                Vector2 target = state == runState ? _movementInput * 2 : _movementInput;
+                CameraTargetTransform.DOLocalMove(target, CameraBiasTime).SetEase(Ease.InOutSine);
             }
         }
-#endif
-        #endregion
     }
 }
