@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -41,9 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Perspective
+  - name: Ground
     uniqueID: 3420322187
     locked: 0
-  - name: Top
+  - name: Player
     uniqueID: 282671577
     locked: 0
+  m_RenderingLayers:
+  - Default

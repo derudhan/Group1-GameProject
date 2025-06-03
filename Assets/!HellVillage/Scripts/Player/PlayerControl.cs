@@ -8,6 +8,8 @@ using UnityEngine;
 namespace HellVillage {
     public class PlayerControl : StateCore {
         public Transform CameraTargetTransform;
+        public float CameraWalkDistance = 0.5f;
+        public float CameraRunDistance = 1f;
         public float CameraBiasTime = 0.2f;
 
         public IdleState idleState;
@@ -88,7 +90,14 @@ namespace HellVillage {
 
         private void HandleCameraBias() {
             if (CameraTargetTransform != null && _movementInput != Vector2.zero) {
-                Vector2 target = state == runState ? _movementInput * 2 : _movementInput;
+                Vector2 target;
+
+                if (state == runState) {
+                    target = _movementInput * CameraRunDistance;
+                } else {
+                    target = _movementInput * CameraWalkDistance;
+                }
+
                 CameraTargetTransform.DOLocalMove(target, CameraBiasTime).SetEase(Ease.InOutSine);
             }
         }

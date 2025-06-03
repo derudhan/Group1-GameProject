@@ -10,7 +10,8 @@ namespace HellVillage {
         }
 
         public override void DoUpdate() {
-            animator.speed = Helpers.Map(core.movementStats.MaxRunSpeed, 0, 1, 0, 1.5f, true);
+            Vector2 vel = rb.linearVelocity;
+            animator.speed = Helpers.Map(Mathf.Abs(vel.magnitude), 0, 1, 0, 1.5f, true);
         }
     }
 }

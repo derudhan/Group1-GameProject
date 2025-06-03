@@ -28,5 +28,12 @@ namespace HellVillage {
 
             InteractWasPressed = _interactAction.WasPressedThisFrame();
         }
+
+        public static void EnableInput() {
+            PlayerInput.currentActionMap.Enable();
+        }
+        public static void DisableInput() {
+            PlayerInput.currentActionMap.Disable();
+        }
     }
 }
