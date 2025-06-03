@@ -1,9 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace HellVillage {
     public class MenuManager : MonoBehaviour {
+        public UnityEvent OnMenuOpen;
+        public UnityEvent OnMenuClose;
+
+        [SerializeField] bool InMainMenu = true;
+
         [Header("Menus")]
         [SerializeField] GameObject _menuObj;
         [SerializeField] GameObject _controlsObj;
@@ -13,40 +19,46 @@ namespace HellVillage {
         bool _isOpen;
 
         private void Awake() {
-            MainMenuOpen();
+            if (InMainMenu) {
+                MenuOpen();
+            } else {
+                MenuClose();
+            }
         }
 
         private void Update() {
-            if (Keyboard.current.tabKey.wasPressedThisFrame) {
+            if (Keyboard.current.tabKey.wasPressedThisFrame && !InMainMenu) {
                 ToggleMenu();
             }
         }
 
         private void ToggleMenu() {
             if (_isOpen) {
-                MainMenuClose();
+                MenuClose();
                 _isOpen = false;
             } else {
-                MainMenuOpen();
+                MenuOpen();
                 _isOpen = true;
             }
         }
 
         #region Button Events
-        public void MainMenuOpen() {
+        public void MenuOpen() {
             _isOpen = true;
             _menuObj.SetActive(true);
             _controlsObj.SetActive(false);
             _audioObj.SetActive(false);
             _graphicsObj.SetActive(false);
+            OnMenuOpen?.Invoke();
         }
 
-        public void MainMenuClose() {
+        public void MenuClose() {
             _isOpen = false;
             _menuObj.SetActive(false);
             _controlsObj.SetActive(false);
             _audioObj.SetActive(false);
             _graphicsObj.SetActive(false);
+            OnMenuClose?.Invoke();
         }
 
         public void ControlsOpen() {
@@ -68,6 +80,11 @@ namespace HellVillage {
             _audioObj.SetActive(false);
             _controlsObj.SetActive(false);
             _menuObj.SetActive(false);
+        }
+
+        public void QuitGame() {
+            Application.Quit();
+            Debug.Log("Quit Game");
         }
         #endregion
     }

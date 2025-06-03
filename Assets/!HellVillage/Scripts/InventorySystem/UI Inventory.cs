@@ -49,6 +49,8 @@ namespace HellVillage {
 
             if (inventory.GetItemList().Count == 0) {
                 gameObject.SetActive(false);
+            } else {
+                gameObject.SetActive(true);
             }
         }
     }

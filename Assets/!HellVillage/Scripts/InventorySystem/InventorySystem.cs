@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace HellVillage {
     public class InventorySystem : MonoBehaviour {
-        [SerializeField] private UIInventory uIInventory;
         public Inventory inventory { get; private set; }
+        [SerializeField] private UIInventory uIInventory;
 
         private void Awake() {
             inventory = new Inventory();

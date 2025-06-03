@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yarn.Unity;
 
 namespace HellVillage {
     public class InputManager : MonoBehaviour {
@@ -8,6 +9,8 @@ namespace HellVillage {
         public static Vector2 Movement;
         public static bool RunIsHeld;
         public static bool InteractWasPressed;
+
+        public static bool InputDisabled = false;
 
         private InputAction _moveAction;
         private InputAction _runAction;
@@ -22,6 +25,8 @@ namespace HellVillage {
         }
 
         private void Update() {
+            if (InputDisabled) return;
+
             Movement = _moveAction.ReadValue<Vector2>();
 
             RunIsHeld = _runAction.IsPressed();
@@ -29,11 +34,13 @@ namespace HellVillage {
             InteractWasPressed = _interactAction.WasPressedThisFrame();
         }
 
+        [YarnCommand("FreezePlayer")]
         public static void EnableInput() {
-            PlayerInput.currentActionMap.Enable();
+            InputDisabled = false;
         }
+        [YarnCommand("UnFreezePlayer")]
         public static void DisableInput() {
-            PlayerInput.currentActionMap.Disable();
+            InputDisabled = true;
         }
     }
 }

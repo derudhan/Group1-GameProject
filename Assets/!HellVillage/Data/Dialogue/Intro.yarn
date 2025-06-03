@@ -1,5 +1,6 @@
 ﻿title: Intro
 ---
+<<FreezePlayer>>
 Hero: Agh, kakiku!
 Hero: Kamu siapa?
 -> Aku Rover, salam kenal!
@@ -8,4 +9,5 @@ Hero: Kamu siapa?
     Hero: Musuh? Kenapa?
     Hero: Aku tidak mau berantem!
 Hero: Ya sudah, semangat.
+<<UnFreezePlayer>>
 ===

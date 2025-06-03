@@ -17,13 +17,13 @@ namespace HellVillage {
             yield return _sceneFade.FadeInCoroutine(_sceneFadeDuration);
         }
 
-        public void LoadScene(string sceneName) {
-            StartCoroutine(LoadSceneCoroutine(sceneName));
+        public void LoadScene(string nextScene) {
+            StartCoroutine(LoadSceneCoroutine(nextScene));
         }
 
-        private IEnumerator LoadSceneCoroutine(string sceneName) {
+        private IEnumerator LoadSceneCoroutine(string nextScene) {
             yield return _sceneFade.FadeOutCoroutine(_sceneFadeDuration);
-            yield return SceneManager.LoadSceneAsync(sceneName);
+            yield return SceneManager.LoadSceneAsync(nextScene);
         }
     }
 }
