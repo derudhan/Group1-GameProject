@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HellVillage {
+namespace HellVillage.InventorySystem {
     public class UIInventory : MonoBehaviour {
         private Inventory inventory;
         [SerializeField] private Transform itemSlotContainer;

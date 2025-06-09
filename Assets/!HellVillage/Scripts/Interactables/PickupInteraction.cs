@@ -1,11 +1,12 @@
+using HellVillage.InventorySystem;
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.InteractionSystem {
     public class PickupInteraction : TriggerInteractionBase {
-        private InventorySystem inventorySystem;
+        private InventoryManage inventorySystem;
 
         private void Awake() {
-            inventorySystem = FindFirstObjectByType<InventorySystem>();
+            inventorySystem = FindFirstObjectByType<InventoryManage>();
             if (inventorySystem == null) {
                 Debug.LogError("InventorySystem not found in the scene.");
             }

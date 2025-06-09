@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.StateMachine {
     public class StateMachine {
         public State state;
 

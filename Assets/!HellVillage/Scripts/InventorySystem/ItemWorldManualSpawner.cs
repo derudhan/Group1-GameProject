@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.InventorySystem {
     public class ItemWorldManualSpawner : MonoBehaviour {
         public Item item;
 

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace HellVillage {
+namespace HellVillage.InventorySystem {
     public class ItemWorld : MonoBehaviour {
         public static ItemWorld SpawnItemWorld(Item item, Vector2 position) {
             ItemWorld itemWorld = Instantiate(AssetsManager.Instance.itemWorldPrefab, position, Quaternion.identity);

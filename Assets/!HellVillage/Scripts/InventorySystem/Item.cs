@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.InventorySystem {
     [System.Serializable]
     public class Item {
         public enum ItemType {

@@ -1,6 +1,8 @@
+using HellVillage.Input;
+using HellVillage.Interface;
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.InteractionSystem {
     [RequireComponent(typeof(Collider2D))]
     public class TriggerInteractionBase : MonoBehaviour, IInteractable {
         public Collider2D Collider { get; set; }

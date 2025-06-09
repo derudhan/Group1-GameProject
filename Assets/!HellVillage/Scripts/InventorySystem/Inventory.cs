@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.InventorySystem {
     public class Inventory {
         public event EventHandler OnItemListChanged;
 
@@ -10,8 +10,6 @@ namespace HellVillage {
 
         public Inventory() {
             itemList = new List<Item>();
-
-            Debug.Log("Inventory initialized with " + itemList.Count + " items.");
         }
 
         public void AddItem(Item item) {

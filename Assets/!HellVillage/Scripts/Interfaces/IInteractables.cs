@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.Interface {
     public interface IInteractable {
         Collider2D Collider { get; set; }
 

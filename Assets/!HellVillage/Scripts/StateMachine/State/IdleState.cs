@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.StateMachine {
     public class IdleState : State {
         [SerializeField] protected string animationStateName;
         protected int animationStateHash => Animator.StringToHash(animationStateName);

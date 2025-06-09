@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace HellVillage {
-    public class InventorySystem : MonoBehaviour {
+namespace HellVillage.InventorySystem {
+    public class InventoryManage : MonoBehaviour {
         public Inventory inventory { get; private set; }
         [SerializeField] private UIInventory uIInventory;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.InventorySystem {
     public class AssetsManager : MonoBehaviour {
         public static AssetsManager Instance { get; private set; }
 

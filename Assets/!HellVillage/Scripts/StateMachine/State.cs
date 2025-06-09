@@ -1,10 +1,11 @@
+using HellVillage.Data;
 using UnityEngine;
 
 /// <summary>
 /// Skrip abstrak untuk state machine.
 /// Class ini digunakan sebagai dasar untuk state-state lain.
 /// </summary>
-namespace HellVillage {
+namespace HellVillage.StateMachine {
     public abstract class State : MonoBehaviour {
         public bool IsComplete { get; protected set; }
 

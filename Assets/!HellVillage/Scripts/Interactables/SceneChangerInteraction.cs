@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.InteractionSystem {
     public class SceneChangerInteraction : TriggerInteractionBase {
         public enum AreaToSpawnAt {
             None,
@@ -11,7 +11,7 @@ namespace HellVillage {
         }
 
         [Header("Spawn TO")]
-        [SerializeField] private AreaToSpawnAt areaToSpawnAt = AreaToSpawnAt.None;
+        // [SerializeField] private AreaToSpawnAt areaToSpawnAt = AreaToSpawnAt.None;
         [SerializeField] private SceneField _sceneToLoad;
 
         [Space(10f)]
@@ -19,7 +19,7 @@ namespace HellVillage {
         public AreaToSpawnAt CurrentAreaPosition = AreaToSpawnAt.None;
 
         public override void Interact() {
-            SceneSwapManager.Instance.SwapSceneFromAreaUse(_sceneToLoad, areaToSpawnAt);
+            // SceneSwapManager.Instance.SwapSceneFromAreaUse(_sceneToLoad, areaToSpawnAt);
         }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yarn.Unity;
 
-namespace HellVillage {
+namespace HellVillage.InteractionSystem {
     public class SomethingInteraction : TriggerInteractionBase {
         public DialogueRunner dialogue;
 

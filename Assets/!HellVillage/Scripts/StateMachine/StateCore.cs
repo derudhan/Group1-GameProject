@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using HellVillage.Data;
 using UnityEngine;
 
-namespace HellVillage {
+namespace HellVillage.StateMachine {
     public abstract class StateCore : MonoBehaviour {
         public Rigidbody2D rigidBody;
         public MovementStats movementStats;
