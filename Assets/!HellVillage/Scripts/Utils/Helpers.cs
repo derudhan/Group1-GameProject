@@ -1,3 +1,5 @@
+using System;
+using HellVillage.Scenes;
 using UnityEngine;
 
 namespace HellVillage.Utils {

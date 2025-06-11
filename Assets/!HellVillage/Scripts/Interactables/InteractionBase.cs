@@ -14,12 +14,11 @@ namespace HellVillage.InteractionSystem {
             CanInteract = false;
         }
 
-        private void Update() {
-            if (CanInteract) {
-                if (InputManager.InteractWasPressed) {
-                    Interact();
-                }
-            }
+        private void OnEnable() {
+            InputManager.PlayerAction.Interact.performed += Interact;
+        }
+        private void OnDisable() {
+            InputManager.PlayerAction.Interact.performed -= Interact;
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {
@@ -33,6 +32,16 @@ namespace HellVillage.InteractionSystem {
                 CanInteract = false;
             }
         }
+
+        #region Listener Methods
+
+        private void Interact(UnityEngine.InputSystem.InputAction.CallbackContext context) {
+            if (CanInteract) {
+                Interact();
+            }
+        }
+
+        #endregion
 
         public virtual void Interact() { }
     }

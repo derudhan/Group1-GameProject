@@ -2,6 +2,12 @@ using TMPro;
 using UnityEngine;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections;
+using HellVillage.Input;
+
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -16,25 +22,49 @@ namespace HellVillage.UIComponents {
     public class CreditsMenuHandler : MonoBehaviour, IPointerClickHandler {
         [Header("Text Settings - Formatting")]
         [SerializeField] private bool trimFirstLine = false;
-        [SerializeField] private int h1FontSize = 72;
-        [SerializeField] private int h2FontSize = 64;
-        [SerializeField] private int h3FontSize = 48;
-        [SerializeField] private int h4FontSize = 32;
+        [SerializeField] private int _h1FontSize = 72;
+        [SerializeField] private int _h2FontSize = 64;
+        [SerializeField] private int _h3FontSize = 48;
+        [SerializeField] private int _h4FontSize = 32;
+
+        [Header("Scroll Settings")]
+        [SerializeField] private bool _autoScrollEnabled = true;
+        [SerializeField, Range(0.0001f, 1f)] private float _scrollSpeed = 0.01f;
+        [SerializeField, Range(1f, 100f)] private float _boostSpeedFactor = 20f;
+        private float _currentScrollPosition = 1f;
 
         [Header("References")]
         [SerializeField] private TextAsset _creditsTextAsset;
         [SerializeField] private TextMeshProUGUI _creditsText;
+        [SerializeField] private Scrollbar _scrollbar;
 
         private void Awake() {
             if (_creditsTextAsset == null) _creditsTextAsset = Resources.Load<TextAsset>("CREDITS");
             if (_creditsText == null) _creditsText = GetComponentInChildren<TextMeshProUGUI>();
+            if (_scrollbar == null) _scrollbar = GetComponentInChildren<Scrollbar>();
         }
 
         private void Start() {
             UpdateTextFromFile();
         }
 
+        private void Update() {
+            float input_axis = -InputManager.UIAction.Navigate.ReadValue<Vector2>().y;
+            if (input_axis != 0f) {
+                ScrollContainer(_boostSpeedFactor * _scrollSpeed * input_axis * Time.deltaTime);
+            } else {
+                ScrollContainer(_scrollSpeed * Time.deltaTime);
+            }
+        }
+
         #region Private Methods
+
+        private void ScrollContainer(float amount) {
+            if (!gameObject.activeInHierarchy || !_autoScrollEnabled || _scrollbar.value < 0f) return;
+
+            _currentScrollPosition = Mathf.Clamp01(_currentScrollPosition - amount);
+            _scrollbar.value = _currentScrollPosition;
+        }
 
         private void UpdateTextFromFile() {
             string text = _creditsTextAsset != null ? _creditsTextAsset.text : "Credits not found.";
@@ -69,7 +99,7 @@ namespace HellVillage.UIComponents {
 
         private string RegexReplaceTitles(string credits) {
             int iteration = 0;
-            int[] headingFontSizes = new int[] { h1FontSize, h2FontSize, h3FontSize, h4FontSize };
+            int[] headingFontSizes = new int[] { _h1FontSize, _h2FontSize, _h3FontSize, _h4FontSize };
 
             foreach (int fontSize in headingFontSizes) {
                 iteration++;
@@ -105,6 +135,7 @@ namespace HellVillage.UIComponents {
             Undo.RecordObject(this, "Get All References");
             _creditsTextAsset = Resources.Load<TextAsset>("CREDITS");
             _creditsText = GetComponentInChildren<TextMeshProUGUI>();
+            _scrollbar = GetComponentInChildren<Scrollbar>();
             EditorUtility.SetDirty(this);
         }
 #endif

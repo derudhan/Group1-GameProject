@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/!HellVillage/Scenes/_PersistentScene.unity
+    guid: 5fda68fb284b1e14fa6c98cdd821e66d
+  - enabled: 1
     path: Assets/!HellVillage/Scenes/BootScene.unity
     guid: df37552969c9d3b4c9eed5ca1ea32beb
   - enabled: 1

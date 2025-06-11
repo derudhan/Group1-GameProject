@@ -1,4 +1,5 @@
 using DG.Tweening;
+using HellVillage.Player2DRPG;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -27,16 +28,7 @@ namespace HellVillage.Cameras {
             if (_currentActiveCamera != null) {
                 _positionComposer = _currentActiveCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachinePositionComposer;
                 _positionComposerOffset = _positionComposer.TargetOffset;
-
-                InitCameraWhenPlayerIsFound();
             }
-        }
-
-        private void InitCameraWhenPlayerIsFound() {
-            _player = GameObject.FindGameObjectWithTag("Player");
-            if (_player == null) return;
-
-            _currentActiveCamera.Target.TrackingTarget = _player.transform;
         }
 
         #region Pan Camera

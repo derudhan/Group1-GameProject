@@ -1,14 +1,23 @@
+using System;
 using DG.Tweening;
+using HellVillage.Data;
 using HellVillage.Input;
 using HellVillage.StateMachine;
 using HellVillage.Utils;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace HellVillage.Player2DRPG {
     /// <summary>
     /// Skrip untuk mengontrol gerakan pemain (2D RPG Style) serta aksi lainnya.
     /// </summary>
-    public class PlayerControl : StateCore {
+    public class PlayerControl : StateCore, IBind<PlayerData> {
+        public UnityEvent OnPausePressed = new UnityEvent();
+
+        public string Id { get; } = System.Guid.NewGuid().ToString();
+        [SerializeField] public PlayerData _playerData;
+
         public Transform CameraTargetTransform;
         public float CameraWalkDistance = 0.5f;
         public float CameraRunDistance = 1f;
@@ -31,6 +40,8 @@ namespace HellVillage.Player2DRPG {
 
             SelectState();
             state.DoUpdateBranch();
+
+            DataUpdate();
         }
 
         private void FixedUpdate() {
@@ -41,8 +52,14 @@ namespace HellVillage.Player2DRPG {
         }
 
         private void CheckInput() {
-            _movementInput = InputManager.Movement.normalized;
-            _runIsHeld = InputManager.RunIsHeld;
+            _movementInput = InputManager.PlayerAction.Move.ReadValue<Vector2>().normalized;
+            _runIsHeld = InputManager.PlayerAction.Sprint.IsPressed();
+            InputManager.PlayerAction.Pause.performed += OnPausePressed_Action;
+        }
+
+        private void OnPausePressed_Action(InputAction.CallbackContext context) {
+            DisableInput();
+            OnPausePressed.Invoke();
         }
 
         /// <summary>
@@ -103,5 +120,29 @@ namespace HellVillage.Player2DRPG {
                 CameraTargetTransform.DOLocalMove(target, CameraBiasTime).SetEase(Ease.InOutSine);
             }
         }
+
+        private void DataUpdate() {
+            _playerData.position = transform.position;
+        }
+
+        public void EnableInput() {
+            InputManager.PlayerAction.Enable();
+        }
+        public void DisableInput() {
+            InputManager.PlayerAction.Disable();
+        }
+
+        public void Bind(PlayerData data) {
+            this._playerData = data;
+            this._playerData.Id = Id;
+
+            transform.position = data.position;
+        }
+    }
+
+    [Serializable]
+    public class PlayerData : ISaveable {
+        [field: SerializeField] public string Id { get; set; }
+        public Vector2 position;
     }
 }

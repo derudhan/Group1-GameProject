@@ -1,52 +1,30 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Yarn.Unity;
 
 namespace HellVillage.Input {
     public class InputManager : MonoBehaviour {
-        public static PlayerInput PlayerInput;
+        private static InputSystem inputSystem;
 
-        public static Vector2 Movement;
-        public static bool RunIsHeld;
-        public static bool InteractWasPressed;
-
-        public static bool InputDisabled = false;
-
-        private InputAction _moveAction;
-        private InputAction _runAction;
-        private InputAction _interactAction;
+        public static InputSystem.PlayerActions PlayerAction => inputSystem.Player;
+        public static InputSystem.UIActions UIAction => inputSystem.UI;
 
         private void Awake() {
-            PlayerInput = GetComponent<PlayerInput>();
-
-            _moveAction = PlayerInput.actions["Move"];
-            _runAction = PlayerInput.actions["Sprint"];
-            _interactAction = PlayerInput.actions["Interact"];
-        }
-
-        private void Update() {
-            if (InputDisabled) {
-                Movement = Vector2.zero;
-                RunIsHeld = false;
-                InteractWasPressed = false;
-                return;
-            }
-            ;
-
-            Movement = _moveAction.ReadValue<Vector2>();
-
-            RunIsHeld = _runAction.IsPressed();
-
-            InteractWasPressed = _interactAction.WasPressedThisFrame();
+            inputSystem ??= new InputSystem();
+            inputSystem.Enable();
         }
 
         [YarnCommand("UnFreezePlayer")]
-        public static void EnableInput() {
-            InputDisabled = false;
-        }
+        public static void EnablePlayerInput() => PlayerAction.Enable();
         [YarnCommand("FreezePlayer")]
-        public static void DisableInput() {
-            InputDisabled = true;
+        public static void DisablePlayerInput() => PlayerAction.Disable();
+
+        public static void EnableAllInput() {
+            PlayerAction.Enable();
+            UIAction.Enable();
+        }
+        public static void DisableAllInput() {
+            PlayerAction.Disable();
+            UIAction.Disable();
         }
     }
 }

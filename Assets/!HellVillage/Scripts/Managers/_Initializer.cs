@@ -5,8 +5,8 @@ namespace HellVillage.Init {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 
         public static void Execute() {
-            Debug.Log("Loaded by the Persist Objects from the Initializer script");
-            Object.Instantiate(Resources.Load("PersistentObject"));
+            Debug.Log("Load Persistent Scene from the Initializer script");
+            Object.Instantiate(Resources.Load<PersistentObject>("PersistentObject"));
         }
     }
 }

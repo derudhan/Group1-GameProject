@@ -403,8 +403,8 @@ namespace HellVillage.DialogueSystem {
         }
 
         public void HighlightSprite(Image sprite) {
-            StopCoroutine("HighlightSpriteCoroutine");
-            StartCoroutine("HighlightSpriteCoroutine", sprite);
+            StopCoroutine(HighlightSpriteCoroutine(null));
+            StartCoroutine(HighlightSpriteCoroutine(sprite));
         }
 
         IEnumerator HighlightSpriteCoroutine(Image highlightedSprite) {

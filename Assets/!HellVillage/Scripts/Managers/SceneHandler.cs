@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using HellVillage.Input;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -51,18 +53,18 @@ namespace HellVillage.Scenes {
 
         #region Private Methods
 
-        private IEnumerator StartFadeIn(float _fadeDuration) {
+        private IEnumerator StartFadeIn(float _fadeDuration, FadeType fadeType = FadeType.BlackFade) {
             if (_fadingCoroutine != null) {
                 StopCoroutine(_fadingCoroutine);
             }
-            yield return _sceneFade.FadeInCoroutine(_fadeDuration);
+            yield return _sceneFade.FadeInCoroutine(_fadeDuration, fadeType);
         }
 
-        private IEnumerator StartFadeOut(float _fadeDuration) {
+        private IEnumerator StartFadeOut(float _fadeDuration, FadeType fadeType = FadeType.BlackFade) {
             if (_fadingCoroutine != null) {
                 StopCoroutine(_fadingCoroutine);
             }
-            yield return _sceneFade.FadeOutCoroutine(_fadeDuration);
+            yield return _sceneFade.FadeOutCoroutine(_fadeDuration, fadeType);
         }
 
         /// <summary>
@@ -86,33 +88,19 @@ namespace HellVillage.Scenes {
             while (_sceneQueue.Count > 0) {
                 SceneOperation operationData = _sceneQueue.Dequeue();
                 AsyncOperation loadingOperation;
-                // Debug.Log($"Operation Type: {operationData.UseSceneField}, Loading: {operationData.IsLoadingOperation}, Scene Index: {operationData.SceneIndex}, Scene Field: {operationData.SceneField?.SceneName}");
+                // Debug.Log($"Is Loading: {operationData.IsLoadingOperation}, Scene Index: {operationData.SceneIndex}, Active Scene Index: {operationData.ActiveSceneIndex}");
 
                 // Membuat kemudian melaksanakan operasi scene berdasarkan apakah itu operasi loading atau unloading
-                if (operationData.UseSceneField) {
-                    // Jika menggunakan SceneField, maka kita akan menggunakan SceneField untuk memuat atau meng-unload scene
-                    {
-                        loadingOperation = operationData.IsLoadingOperation
-                            ? SceneManager.LoadSceneAsync(operationData.SceneField, LoadSceneMode.Additive)
-                            : SceneManager.UnloadSceneAsync(operationData.SceneField);
-                    }
-                } else {
-                    // Jika tidak menggunakan SceneField, maka kita akan menggunakan indeks scene untuk memuat atau meng-unload scene
-                    {
-                        loadingOperation = operationData.IsLoadingOperation
-                            ? SceneManager.LoadSceneAsync(operationData.SceneIndex, LoadSceneMode.Additive)
-                            : SceneManager.UnloadSceneAsync(operationData.SceneIndex);
-                    }
-                }
+                loadingOperation = operationData.IsLoadingOperation
+                    ? SceneManager.LoadSceneAsync(operationData.SceneIndex, LoadSceneMode.Additive)
+                    : SceneManager.UnloadSceneAsync(operationData.SceneIndex);
 
                 // Menunggu hingga operasi scene selesai
                 yield return loadingOperation;
 
                 // Setelah operasi selesai, mengatur scene aktif ke scene yang ditentukan
-                if (operationData.ActiveSceneIndex != 0) {
+                if (operationData.ActiveSceneIndex > 1) {
                     SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(operationData.ActiveSceneIndex));
-                } else if (operationData.ActiveSceneField != null) {
-                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(operationData.ActiveSceneField.SceneName));
                 }
             }
 
@@ -130,41 +118,31 @@ namespace HellVillage.Scenes {
         /// Ini akan mengatur scene aktif ke scene yang ditentukan setelah operasi selesai.
         /// Jika ada operasi scene yang sedang berjalan, maka metode ini akan menunggu hingga operasi tersebut selesai sebelum melanjutkan.
         /// </summary>
-        /// <param name="sceneIndex"></param>
-        /// <param name="fadeDuration"></param>
-        /// <returns></returns>
-        private IEnumerator StartSceneOperationsWithFade(int sceneIndex, float fadeDuration) {
+        private IEnumerator StartSceneOperationsWithFade(int sceneIndex, float fadeDuration, FadeType fadeType = FadeType.BlackFade) {
+            InputManager.DisableAllInput();
+            // Debug.Log("PlayerAction status: " + InputManager.PlayerAction.enabled + ", UIAction status: " + InputManager.UIAction.enabled);
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
             if (_fadingCoroutine != null) {
                 StopCoroutine(_fadingCoroutine);
             }
 
-            LoadScene(sceneIndex, true);
             UnLoadScene(currentSceneIndex, true);
+            LoadScene(sceneIndex, true);
 
-            yield return StartFadeOut(fadeDuration);
+            yield return StartFadeOut(fadeDuration, fadeType);
 
             yield return RunSceneOperationsCoroutine();
 
-            yield return StartFadeIn(fadeDuration);
+            yield return StartFadeIn(fadeDuration, fadeType);
+            InputManager.EnableAllInput();
+            // Debug.Log("PlayerAction status: " + InputManager.PlayerAction.enabled + ", UIAction status: " + InputManager.UIAction.enabled);
         }
 
         private IEnumerator StartSceneOperationsWithFade(SceneField sceneField, float fadeDuration) {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int sceneIndex = ScenesEnumExtensions.GetSceneEnumByName(sceneField.SceneName);
 
-            if (_fadingCoroutine != null) {
-                StopCoroutine(_fadingCoroutine);
-            }
-
-            LoadScene(sceneField, true);
-            UnLoadScene(currentSceneIndex, true);
-
-            yield return StartFadeOut(fadeDuration);
-
-            yield return RunSceneOperationsCoroutine();
-
-            yield return StartFadeIn(fadeDuration);
+            yield return StartSceneOperationsWithFade(sceneIndex, fadeDuration);
         }
 
         #endregion
@@ -178,14 +156,13 @@ namespace HellVillage.Scenes {
         /// Ini akan menambahkan operasi scene ke dalam antrian dan menjalankan operasi tersebut.
         /// Jika `onlyAddToQueue` diatur ke true, maka hanya akan menambahkan operasi ke antrian tanpa menjalankannya.
         /// </summary>
-        /// <param name="sceneIndex"></param>
-        /// <param name="onlyAddToQueue"></param>
-        /// <param name="setActiveScene"></param>
         public void LoadScene(int sceneIndex, bool onlyAddToQueue = false, int setActiveScene = 0) {
+            int targetActiveScene = setActiveScene > 1 ? setActiveScene : sceneIndex;
+
             SceneOperation operation = new SceneOperation {
                 ID = GUID.Generate().ToString(),
                 SceneIndex = sceneIndex,
-                ActiveSceneIndex = setActiveScene == 0 ? sceneIndex : setActiveScene, // Kalau setActiveScene tidak diberikan, gunakan sceneIndex sebagai setActiveScene
+                ActiveSceneIndex = targetActiveScene,
                 IsLoadingOperation = true
             };
 
@@ -195,19 +172,10 @@ namespace HellVillage.Scenes {
             _ = StartCoroutine(RunSceneOperationsCoroutine());
         }
 
-        public void LoadScene(SceneField sceneIndex, bool onlyAddToQueue = false, SceneField setActiveScene = null) {
-            SceneOperation operation = new SceneOperation {
-                ID = GUID.Generate().ToString(),
-                UseSceneField = true,
-                SceneField = sceneIndex,
-                ActiveSceneField = setActiveScene ?? sceneIndex, // Kalau setActiveScene tidak diberikan, gunakan sceneIndex sebagai setActiveScene
-                IsLoadingOperation = true
-            };
-
-            _sceneQueue.Enqueue(operation);
-
-            if (onlyAddToQueue) return;
-            _ = StartCoroutine(RunSceneOperationsCoroutine());
+        public void LoadScene(SceneField sceneField, bool onlyAddToQueue = false, SceneField setActiveScene = null) {
+            int sceneIndex = ScenesEnumExtensions.GetSceneEnumByName(sceneField.SceneName);
+            int activeSceneIndex = setActiveScene != null ? sceneIndex : 0;
+            LoadScene(sceneIndex, onlyAddToQueue, activeSceneIndex);
         }
 
         /// <summary>
@@ -215,9 +183,6 @@ namespace HellVillage.Scenes {
         /// Ini akan menambahkan operasi scene ke dalam antrian dan menjalankan operasi tersebut.
         /// Jika `onlyAddToQueue` diatur ke true, maka hanya akan menambahkan operasi ke antrian tanpa menjalankannya.
         /// </summary>
-        /// <param name="sceneIndex"></param>
-        /// <param name="onlyAddToQueue"></param>
-        /// <param name="setActiveScene"></param>
         public void UnLoadScene(int sceneIndex, bool onlyAddToQueue = false, int setActiveScene = 0) {
             SceneOperation operation = new SceneOperation {
                 ID = GUID.Generate().ToString(),
@@ -232,46 +197,34 @@ namespace HellVillage.Scenes {
             _ = StartCoroutine(RunSceneOperationsCoroutine());
         }
 
-        public void UnLoadScene(SceneField sceneIndex, bool onlyAddToQueue = false, SceneField setActiveScene = null) {
-            SceneOperation operation = new SceneOperation {
-                ID = GUID.Generate().ToString(),
-                UseSceneField = true,
-                SceneField = sceneIndex,
-                ActiveSceneField = setActiveScene,
-                IsLoadingOperation = false
-            };
-
-            _sceneQueue.Enqueue(operation);
-
-            if (onlyAddToQueue) return;
-            _ = StartCoroutine(RunSceneOperationsCoroutine());
+        public void UnLoadScene(SceneField sceneField, bool onlyAddToQueue = false, SceneField setActiveScene = null) {
+            int sceneIndex = ScenesEnumExtensions.GetSceneEnumByName(sceneField.SceneName);
+            int activeSceneIndex = setActiveScene != null ? sceneIndex : 0;
+            LoadScene(sceneIndex, onlyAddToQueue, activeSceneIndex);
         }
 
         /// <summary>
         /// Langsung beralih ke scene yang ditentukan berdasarkan indeks scene.
         /// Ini akan memuat scene baru dan meng-unload scene saat ini tanpa menunggu operasi scene lainnya.
         /// </summary>
-        /// <param name="sceneIndex"></param>
         public void SwitchSceneDirect(int sceneIndex) {
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-            LoadScene(sceneIndex);
             UnLoadScene(currentSceneIndex, true);
+            LoadScene(sceneIndex, true);
+
+            _ = StartCoroutine(RunSceneOperationsCoroutine());
         }
 
         public void SwitchSceneDirect(SceneField sceneField) {
-            int currentSceneField = SceneManager.GetActiveScene().buildIndex;
-
-            LoadScene(sceneField);
-            UnLoadScene(currentSceneField, true);
+            int sceneIndex = SceneManager.GetSceneByName(sceneField.SceneName).buildIndex;
+            SwitchSceneDirect(sceneIndex);
         }
 
         /// <summary>
         /// Beralih ke scene yang ditentukan dengan efek fade in dan fade out.
         /// Ini akan memulai fade in, menjalankan operasi scene, dan kemudian memulai fade out.
         /// </summary>
-        /// <param name="sceneIndex"></param>
-        /// <param name="fadeDuration"></param>
         public void SwitchSceneWithFade(int sceneIndex, float fadeDuration) {
             _ = StartCoroutine(StartSceneOperationsWithFade(sceneIndex, fadeDuration));
         }

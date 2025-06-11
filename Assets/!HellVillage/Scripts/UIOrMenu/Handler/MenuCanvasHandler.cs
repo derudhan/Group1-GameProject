@@ -2,13 +2,9 @@ using UnityEngine;
 
 namespace HellVillage.UIComponents {
     public class MenuCanvasHandler : MonoBehaviour {
-        [SerializeField] private MainMenuHandler _mainMenu;
+        [SerializeField] private GameObject _firstMenu;
 
         private GameObject _currentMenu;
-
-        private void Awake() {
-            if (_mainMenu == null) _mainMenu = GetComponentInChildren<MainMenuHandler>(true);
-        }
 
         private void Start() {
             InitMenu();
@@ -18,11 +14,10 @@ namespace HellVillage.UIComponents {
 
         private void InitMenu() {
             foreach (Transform child in transform) {
-                if (child != _mainMenu.transform) {
-                    child.gameObject.SetActive(false);
-                }
+                child.gameObject.SetActive(false);
             }
-            ToggleMenu(_mainMenu.gameObject);
+
+            if (_firstMenu != null) ToggleMenu(_firstMenu.gameObject);
         }
 
         #endregion
@@ -35,6 +30,13 @@ namespace HellVillage.UIComponents {
                 _currentMenu.SetActive(false);
             }
             _currentMenu = menu;
+        }
+
+        public void HideAllMenu() {
+            foreach (Transform child in transform) {
+                child.gameObject.SetActive(false);
+            }
+            _currentMenu = null;
         }
 
         public void ExitGame() {
