@@ -1,3 +1,4 @@
+using HellVillage.Scenes;
 using UnityEngine;
 
 namespace HellVillage.UIComponents {
@@ -37,6 +38,10 @@ namespace HellVillage.UIComponents {
                 child.gameObject.SetActive(false);
             }
             _currentMenu = null;
+        }
+
+        public void SceneChanger(ScenesEnum scene) {
+            SceneHandler.Instance.SwitchSceneWithFade((int)scene, 1f);
         }
 
         public void ExitGame() {

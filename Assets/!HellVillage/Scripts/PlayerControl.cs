@@ -52,8 +52,8 @@ namespace HellVillage.Player2DRPG {
         }
 
         private void CheckInput() {
-            _movementInput = InputManager.PlayerAction.Move.ReadValue<Vector2>().normalized;
-            _runIsHeld = InputManager.PlayerAction.Sprint.IsPressed();
+            _movementInput = InputManager.Move.normalized;
+            _runIsHeld = InputManager.RunIsHeld;
             InputManager.PlayerAction.Pause.performed += OnPausePressed_Action;
         }
 
@@ -66,7 +66,7 @@ namespace HellVillage.Player2DRPG {
         /// Function untuk mengatur state pemain berdasarkan input.
         /// </summary>
         private void SelectState() {
-            if (_movementInput.magnitude > 0.1f) {
+            if (_movementInput.magnitude > 0.1f && rigidBody.linearVelocity.magnitude > 0.1f) {
                 if (_runIsHeld) {
                     Set(runState);
                 } else {

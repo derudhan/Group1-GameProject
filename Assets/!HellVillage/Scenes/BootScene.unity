@@ -692,8 +692,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBeforeMainMenu: 3
-  bootSplashContainer: {fileID: 0}
-  iconImage: {fileID: 0}
+  bootSplashContainer: {fileID: 665874762}
+  iconImage: {fileID: 2014221326}
 --- !u!1 &1283312276
 GameObject:
   m_ObjectHideFlags: 0

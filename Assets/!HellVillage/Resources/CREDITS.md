@@ -2,14 +2,6 @@
 
 ## Contributions:
 
-### Development:
-
-#### Takin Godot Template
-
-Created by: [TinyTakinTeller](https://github.com/TinyTakinTeller/TakinGodotTemplate/graphs/contributors)\
-Source: [github: TakinGodotTemplate](https://github.com/TinyTakinTeller/TakinGodotTemplate/)\
-License: [MIT License](https://github.com/TinyTakinTeller/TakinGodotTemplate/blob/master/LICENSE)
-
 ## Assets:
 
 ### Audio:
@@ -37,17 +29,6 @@ License: [CC0 (Public Domain)](https://creativecommons.org/publicdomain/zero/1.0
 
 [comment]: #
 [comment]: # '`image/game/animal/png/*`'
-
-#### Godot Logo (Boot Splash)
-
-Modified by: [TinyTakinTeller](https://github.com/TinyTakinTeller)\
-Created by: [Andrea Calabró](https://godotengine.org/press/)\
-Source: [godotengine.org: Press Kit](https://godotengine.org/press/)\
-License: [CC BY 4.0 International](https://github.com/godotengine/godot/blob/master/LOGO_LICENSE.txt)
-
-[comment]: #
-[comment]: # '`boot_splash_2560_1440.png`'
-[comment]: # '`icon_1024_1024.png`'
 
 #### UI Icons: Plus, Minus
 
@@ -172,18 +153,6 @@ License: [MIT License](https://github.com/hugemenace/resonate/blob/main/LICENSE)
 Version: 2.4.0
 
 ### Tools:
-
-#### Godot
-
-Created by: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)\
-Source: [godotengine.org](https://godotengine.org/)\
-License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.txt)
-
-#### GDScript Toolkit
-
-Created by: [Scony and contributors](https://github.com/Scony/godot-gdscript-toolkit/graphs/contributors)\
-Source: [github: GDScript Toolkit](https://github.com/Scony/godot-gdscript-toolkit)\
-License: [MIT License](https://github.com/Scony/godot-gdscript-toolkit/blob/master/LICENSE)
 
 #### Git
 

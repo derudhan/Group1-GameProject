@@ -1,4 +1,3 @@
-using HellVillage.Data;
 using UnityEngine;
 
 /// <summary>

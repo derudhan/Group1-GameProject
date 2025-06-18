@@ -1,5 +1,4 @@
 using HellVillage.Input;
-using HellVillage.Interface;
 using UnityEngine;
 
 namespace HellVillage.InteractionSystem {

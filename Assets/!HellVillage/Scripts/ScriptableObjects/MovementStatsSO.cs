@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HellVillage.Data {
+namespace HellVillage {
     [CreateAssetMenu(menuName = "Movement Stats")]
     public class MovementStats : ScriptableObject {
         [Header("Walk")]

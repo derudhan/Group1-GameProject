@@ -2,7 +2,7 @@ using HellVillage.InteractionSystem;
 using UnityEditor;
 using UnityEngine;
 
-namespace HellVillage.EditorCustom {
+namespace HellVillage.InteractionSystem {
     [CustomEditor(typeof(SceneChangerInteraction))]
     class LabelHandle : Editor {
         private static GUIStyle labelStyle;

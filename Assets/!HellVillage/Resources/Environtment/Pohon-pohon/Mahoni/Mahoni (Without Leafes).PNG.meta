@@ -107,8 +107,8 @@ TextureImporter:
         y: 164
         width: 453
         height: 708
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e6c025933d1ddf942b278cdd6c848fcd
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mahoni (Without Leafes)_0: 475656160076956280
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

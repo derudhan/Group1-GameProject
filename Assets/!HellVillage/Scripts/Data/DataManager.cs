@@ -10,12 +10,14 @@ namespace HellVillage.Data {
     [Serializable]
     public class GameData {
         public string Name;
+        public ScenesEnum CurrentActiveScene;
         public PlayerData PlayerData;
     }
 
     public class DataManager : MonoBehaviour {
         public static DataManager Instance { get; private set; }
 
+        [SerializeField] private bool _encryptSave = false;
         public GameData gameData;
 
         private IDataService _dataService;
@@ -25,18 +27,27 @@ namespace HellVillage.Data {
         private void Awake() {
             if (Instance == null) Instance = this;
             AudioOptions = GetComponentInChildren<AudioOptions>();
-            _dataService = new FileDataService(new JsonSerializer());
+
+            if (_encryptSave) {
+                _dataService = new FileDataService(new JsonBase64Serializer());
+            } else {
+                _dataService = new FileDataService(new JsonSerializer());
+            }
         }
 
-        private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
-        private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+        private void Start() => OnActiveSceneChanged(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-            if (scene.name == ScenesEnum.MainMenu.ToString()) {
+        private void OnEnable() => SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        private void OnDisable() => SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+
+        private void OnActiveSceneChanged(Scene current, Scene next) {
+            // Debug.Log($"Active scene changed from {current.name} to {next.name}");
+            if (next.buildIndex == (int)ScenesEnum._PersistentScene || next.buildIndex == (int)ScenesEnum.MainMenu) {
                 return;
             }
 
-            Bind<PlayerControl, PlayerData>(gameData.PlayerData);
+            gameData.CurrentActiveScene = (ScenesEnum)next.buildIndex;
+            LoadGameOrCreate(gameData.Name);
         }
 
         private void Bind<T, TData>(TData data) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
@@ -47,7 +58,7 @@ namespace HellVillage.Data {
             }
         }
 
-        void Bind<T, TData>(List<TData> datas) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
+        private void Bind<T, TData>(List<TData> datas) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
             var entities = FindObjectsByType<T>(FindObjectsSortMode.None);
 
             foreach (var entity in entities) {
@@ -60,14 +71,16 @@ namespace HellVillage.Data {
             }
         }
 
-        public void SaveGame() => _dataService.Save(gameData, true);
+        public void SaveGame() => _dataService.Save(gameData);
 
-        public void LoadGame(string gameName) {
+        public void LoadGameOrCreate(string gameName) {
+            if (!_dataService.SaveExists(gameName)) SaveGame();
             gameData = _dataService.Load(gameName);
+            // Debug.Log($"Loading game data: {gameData == null}");
 
-            if (String.IsNullOrWhiteSpace(gameData.Name)) {
-                gameData.Name = "Game";
-            }
+            if (String.IsNullOrWhiteSpace(gameData.Name)) gameData.Name = "Game";
+
+            Bind<PlayerControl, PlayerData>(gameData.PlayerData);
         }
 
         public void SaveToPlayerPrefs(string key, float value) {

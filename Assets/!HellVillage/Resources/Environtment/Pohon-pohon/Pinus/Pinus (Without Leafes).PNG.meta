@@ -107,8 +107,8 @@ TextureImporter:
         y: 163
         width: 224
         height: 707
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.07}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 195f3d369b2372a4e9564ca6976bcc23
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pinus (Without Leafes)_0: 1863416456087083847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

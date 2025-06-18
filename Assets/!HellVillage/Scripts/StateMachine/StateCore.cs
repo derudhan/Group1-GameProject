@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using HellVillage.Data;
 using UnityEngine;
 
 namespace HellVillage.StateMachine {

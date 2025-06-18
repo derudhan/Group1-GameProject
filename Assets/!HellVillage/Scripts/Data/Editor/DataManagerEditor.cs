@@ -15,7 +15,7 @@ namespace HellVillage.Data {
             }
 
             if (GUILayout.Button("Load Game")) {
-                dataManager.LoadGame(gameName);
+                dataManager.LoadGameOrCreate(gameName);
             }
         }
     }

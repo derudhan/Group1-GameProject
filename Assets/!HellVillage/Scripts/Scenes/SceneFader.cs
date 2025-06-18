@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HellVillage {
+namespace HellVillage.Scenes {
     public enum FadeType {
         BlackFade,
     }

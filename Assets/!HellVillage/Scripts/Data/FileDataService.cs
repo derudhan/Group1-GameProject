@@ -43,9 +43,10 @@ namespace HellVillage.Data {
 
         public GameData Load(string name) {
             string fileLocation = GetFilePathOrCreate(name);
+            Debug.Log($"Loading game data from: {fileLocation}");
 
             if (!File.Exists(fileLocation)) {
-                throw new FileNotFoundException($"The file '{name}{_fileExtension}' does not exist.");
+                throw new FileNotFoundException($"The file '{name}{_fileExtension}' does not exist at the specified location: {fileLocation}");
             }
 
             return _serializer.Deserialize<GameData>(File.ReadAllText(fileLocation));
@@ -69,6 +70,11 @@ namespace HellVillage.Data {
             foreach (string path in Directory.EnumerateFiles(_dataPath, $"*{_fileExtension}")) {
                 yield return Path.GetFileNameWithoutExtension(path);
             }
+        }
+
+        public bool SaveExists(string name) {
+            string fileLocation = GetFilePathOrCreate(name);
+            return File.Exists(fileLocation);
         }
     }
 }

@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 2b64da4daa43d1641a7988169f73fad1
+guid: 7de025c71425aef45927075cad5eb9fd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4886158609036015627
-    second: Rover_0
+      213: 3644833211466533261
+    second: Rover_g_0
   - first:
-      213: -199968050510410920
-    second: Rover_1
+      213: -1515950793180608395
+    second: Rover_g_1
   - first:
-      213: 5137167500349528194
-    second: Rover_2
+      213: -5804283502484244222
+    second: Rover_g_2
   - first:
-      213: 5509927790302221303
-    second: Rover_3
+      213: 5884983603226633975
+    second: Rover_g_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 4072
+  spritePixelsToUnits: 1024
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,20 +112,20 @@ TextureImporter:
       name: Rover_0
       rect:
         serializedVersion: 2
-        x: 1054
-        y: 103
-        width: 1901
-        height: 4015
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b08fecfed5f1fc340800000000000000
-      internalID: 4886158609036015627
+      spriteID: e9449cda11bb44e4aa378bbc43b5ecb4
+      internalID: -1549992775
       vertices: []
       indices: 
       edges: []
@@ -134,20 +134,20 @@ TextureImporter:
       name: Rover_1
       rect:
         serializedVersion: 2
-        x: 4591
-        y: 89
-        width: 1901
-        height: 4001
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 85b46e61e12993df0800000000000000
-      internalID: -199968050510410920
+      spriteID: 3f23d50daea795544a0577ad24c2706d
+      internalID: 2103206107
       vertices: []
       indices: 
       edges: []
@@ -156,20 +156,20 @@ TextureImporter:
       name: Rover_2
       rect:
         serializedVersion: 2
-        x: 7758
-        y: 103
-        width: 1751
-        height: 3796
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 288d30aaf92ea4740800000000000000
-      internalID: 5137167500349528194
+      spriteID: f227cc8f040cf0c4a81dba655601d107
+      internalID: 1049956876
       vertices: []
       indices: 
       edges: []
@@ -178,20 +178,20 @@ TextureImporter:
       name: Rover_3
       rect:
         serializedVersion: 2
-        x: 10837
-        y: 103
-        width: 1758
-        height: 3796
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 3072
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7f35407e122377c40800000000000000
-      internalID: 5509927790302221303
+      spriteID: d545c38ee39875949b17761dffa845f1
+      internalID: 38578949
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ad0c0fee33091684fabd3bb30bbae80d
+    spriteID: 03afafcc29c46f1439e53d56adaf2de5
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rover_0: 4886158609036015627
-      Rover_1: -199968050510410920
-      Rover_2: 5137167500349528194
-      Rover_3: 5509927790302221303
+      Rover_0: -1549992775
+      Rover_1: 2103206107
+      Rover_2: 1049956876
+      Rover_3: 38578949
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
