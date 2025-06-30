@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce714a0fd63ccb4cb738452f4bdef25, type: 3}
+  m_Name: SoundsSO
+  m_EditorClassIdentifier: 
+  musicLists:
+  - name: None
+    volume: 1
+    audioMixerGroup: {fileID: 0}
+    audioClips: []
+  - name: TestMusic
+    volume: 1
+    audioMixerGroup: {fileID: 0}
+    audioClips: []
+  - name: tost
+    volume: 1
+    audioMixerGroup: {fileID: 0}
+    audioClips: []
+  soundLists:
+  - name: None
+    volume: 1
+    audioMixerGroup: {fileID: 0}
+    audioClips: []
+  - name: TestAudio
+    volume: 1
+    audioMixerGroup: {fileID: 0}
+    audioClips: []
+  - name: test
+    volume: 1
+    audioMixerGroup: {fileID: 0}
+    audioClips: []

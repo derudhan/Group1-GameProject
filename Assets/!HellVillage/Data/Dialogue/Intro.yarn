@@ -32,3 +32,16 @@ Abah: Budak zaman ayeuna mah, sok buru-buru wae.
 <<ToggleCanvas true>>
 <<UnFreezePlayer>>
 ===
+
+title: Test
+---
+<<FreezePlayer>>
+<<ToggleCanvas false>>
+
+<<Act Rover Rover_Default left center>>
+Rover: Jadi ini kota yang rumornya terkutuk itu.
+
+<<Done>>
+<<ToggleCanvas true>>
+<<UnFreezePlayer>>
+===
