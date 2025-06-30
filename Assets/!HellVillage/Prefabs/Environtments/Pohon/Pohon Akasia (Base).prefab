@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4455531763241738466}
   - component: {fileID: 7963750555734013573}
-  - component: {fileID: 7141221278961363031}
+  - component: {fileID: -5346601192120321657}
   m_Layer: 0
   m_Name: Pohon Akasia (Base)
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 4.6, y: 4.6, z: 4.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,19 +77,19 @@ SpriteRenderer:
   m_SortingLayerID: 282671577
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3034466740267452602, guid: 1b0c1978cde87a049bfdcb4b279580b2,
+  m_Sprite: {fileID: 3403629470327611522, guid: 48d73bccd16e63a4eb1441a543e102cb,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 12.04, y: 8.09}
+  m_Size: {x: 0.47851562, y: 1.3769531}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!61 &7141221278961363031
+--- !u!61 &-5346601192120321657
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,15 +123,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.029678524, y: -0.16078654}
+  m_Offset: {x: 0.01095321, y: -0.058031596}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1}
-    oldSize: {x: 6.86, y: 7.02}
-    newSize: {x: 12.04, y: 8.09}
+    pivot: {x: 0.5, y: 0.1012546}
+    oldSize: {x: 1.3789062, y: 1.3769531}
+    newSize: {x: 0.47851562, y: 1.3769531}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.283998, y: 0.53312105}
+  m_Size: {x: 0.47711354, y: 0.06050943}
   m_EdgeRadius: 0

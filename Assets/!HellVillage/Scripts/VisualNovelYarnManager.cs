@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using Yarn.Unity;
 
 namespace HellVillage.DialogueSystem {
     public class VisualNovelYarnManager : DialoguePresenterBase {
         [SerializeField] DialogueRunner dialogueRunner;
+        [SerializeField] PlayableDirector timelineDirector;
 
         [Header("Assets"), Tooltip("Sprites to be used in the dialogue (Without using Resources folder)")]
         public List<Sprite> loadSprites = new List<Sprite>();
@@ -32,7 +34,6 @@ namespace HellVillage.DialogueSystem {
         [HideInInspector]
         public Dictionary<string, VNYActor> actors = new Dictionary<string, VNYActor>();
 
-        // TODO : Change this when GameManager is implemented
         static Vector2 screenSize = new Vector2(1920, 1080);
 
         private void Awake() {
@@ -53,6 +54,18 @@ namespace HellVillage.DialogueSystem {
             dialogueRunner.AddCommandHandler("StopAudioAll", StopAudioAll);
 
             dialogueRunner.AddCommandHandler("Done", VNDone);
+
+            if (timelineDirector != null) {
+                dialogueRunner.AddCommandHandler("PauseTimeline", (string enabled) => {
+                    if (enabled == "true" || enabled == "1") {
+                        timelineDirector.playableGraph.GetRootPlayable(0).SetSpeed(0f);
+                    } else {
+                        timelineDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
+                    }
+                });
+            } else {
+                Debug.LogWarning("VN Manager can't play timelines because the PlayableDirector is not set in the inspector");
+            }
         }
 
         #region Yarn Commands
@@ -381,11 +394,18 @@ namespace HellVillage.DialogueSystem {
         }
 
         private void CleanDestroy<T>(GameObject destroyThis) {
+            if (destroyThis == null) return;
+
+            var component = destroyThis.GetComponent<T>();
+            if (component == null) return;
+
             if (typeof(T) == typeof(Image)) {
-                sprites.Remove(destroyThis.GetComponent<Image>());
+                sprites.Remove(component as Image);
             } else if (typeof(T) == typeof(AudioSource)) {
-                sounds.Remove(destroyThis.GetComponent<AudioSource>());
+                sounds.Remove(component as AudioSource);
             }
+
+            Destroy(destroyThis);
         }
 
         public override YarnTask RunLineAsync(LocalizedLine line, LineCancellationToken token) {
