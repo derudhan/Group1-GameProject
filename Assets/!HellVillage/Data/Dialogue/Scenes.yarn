@@ -1,0 +1,76 @@
+﻿title: Scene1
+---
+<<FreezePlayer>>
+<<ToggleCanvas false>>
+<<PauseTimeline true>>
+
+<i>Pagi ini merupakan sebuah pagi yang sangat ceria di sebuah kota bernama <b>Cloudy City</b>.</i>
+<i>Panas matahari sedikit terasa di Pagi ini yang menandakan bahwasanya pada Pagi hari ini tidak akan mendung pekat sama sekali, hanya sedikit berawan dan berangin sepoi-sepoi yang menyejukkan hati dan pikiran para manusia yang tinggal disana.</i>
+<i>Semua orang mengerjakan pekerjaan mereka dengan sangat baik tanpa adanya kendala sedikitpun, tanpa terkecuali mereka tidak terlambat datang dalam suatu rapat perusahaan sekalipun.</i>
+
+<<Act Rover Rover_Default left center>>
+<i>Berbeda halnya dengan anak muda berumur 21 tahun bernama <b>Rover</b>.</i>
+<i>Kabut tipis masih menggantung di langit mobil tua yang membawa si Rover, seorang mahasiswa tingkat akhir  dari Universitas ternama dikotanya yang bernama CloudSky University.</i>
+<<Move Rover 1.3 center 1.0>>
+<i>Dia akhirnya telah sampai di sebuah desa yang terdengar angker dan mengerikan karena nama desa tersebut adalah Desa Kutukan (<b>Cursed Village</b>).</i>
+
+<<wait 1.0>>
+<i>Hingga pada akhirnya Rover telah sampai di Desa tersebut. Setelah memasuki Desa Neraka (Hell Village) tersebut, kemudian Rover merasakan sedikit keangkeran dan mengucapkan beberapa kata-kata demikian.</i>
+
+<<Done>>
+<<PauseTimeline false>>
+<<ToggleCanvas true>>
+<<UnFreezePlayer>>
+===
+
+title: Scene2
+---
+<<FreezePlayer>>
+<<ToggleCanvas false>>
+<<PauseTimeline true>>
+
+<<Act Rover Rover_Default left center>>
+Rover: Hmmm, sepertinya ini Desa beneran angker atau gimana sih? Tiba-tiba saja gerbangnya bisa terbuka sendiri dengan sangat mudah padahal aku sendiri tadi nyoba sangat sulit dalam membuka kunci gemboknya.
+Rover: Apa jangan-jangan…. beneran serem ya??!! Ah Bo’ong aja itu mah keknya, hari gini masih percaya hal-hal mistis gajelas kek begitu wkwkwk, apalagi aku anak Teknik Elektro, yakali aku percaya begituan dengan semudah itu.. Cih, ada-ada saja!
+
+<<Done>>
+<<PauseTimeline false>>
+<<ToggleCanvas true>>
+<<UnFreezePlayer>>
+===
+
+
+title: Test
+---
+<<FreezePlayer>>
+<<ToggleCanvas false>>
+
+Dialogue Testing
+
+<<Act Abah Abah right center>>
+Abah: Eh Rover, kumaha damang?
+Abah: Awis tepang pisan ning, meni kasep pisan ayeuna mah.
+
+<<Act Rover Rover left center>>
+-> Malu-malu
+    Rover: Hehe, iya bah, Alhamdulillah damang.
+    Rover: Ari abah kumaha? Nuju jalan-jalan ieu teh?
+-> Pede
+    Rover: Jelas atuh bah, emang kasep ti baheula abi mah.
+    Rover: Ayeuna ge alhamdulillah masih sehat bah, abah ge sigana sehat-sehat wae.
+
+<<Shake Abah 0.2>>
+Abah: Eh Abah mah kolot-kolot ge masih boga jiwa pamuda di diri Abah.
+<<Move Rover center center 1.0>>
+Rover: Mantap atuh bah, ya udah atuh bah, Rover pergi dulu nya, aya urusan penting.
+Abah: Oh, nya atuh, sing ati-ati nya.
+<<Move Rover offleft center 2.0>>
+<<wait 1.5>>
+Abah: Budak zaman ayeuna mah, sok buru-buru wae.
+
+<<Move Abah offright center 1.0>>
+
+<<Done>>
+<<ToggleCanvas true>>
+<<UnFreezePlayer>>
+===
